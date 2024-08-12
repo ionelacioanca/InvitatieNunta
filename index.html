@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitație Nuntă</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/elegant-2" rel="stylesheet">
@@ -396,8 +395,8 @@ footer img {
 <body>
         <!-- Numele Mirilor -->
         <section id="invitation-header" class="invitation-header">
-            <img src="{{ url_for('static', filename='images/firstphoto.jpg') }}" class="invitation-image">
-            <img src="{{ url_for('static', filename='images/textlogo.png') }}" class="overlay-image">
+            <img src="firstphoto.jpg" class="invitation-image">
+            <img src="textlogo.png" class="overlay-image">
         </section>
         
         <!-- Countdown -->
@@ -433,7 +432,7 @@ footer img {
         <!-- Invitația -->
         <section class="my-5">
             <div id="invitation">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" class="invitation-image img-fluid">
+            <img src="logo.png" class="invitation-image img-fluid">
             <p class="contact-text">Cu binecuvântarea părinților</p>
             <div class="row justify-content-center">
                 <div class="col-md-4 col-sm-6">
@@ -455,21 +454,21 @@ footer img {
     <div class="container">
         <div class="event my-4">
             <h3>CUNUNIA CIVILĂ</h3>
-            <img src="{{ url_for('static', filename='images/rings.png') }}" class="event-logo img-fluid">
+            <img src="rings.png" class="event-logo img-fluid">
             <p>Casa Miresei, Cuveșdia</p>
             <p>orele 14:00</p>
             <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2773.645473024484!2d21.680096676115163!3d45.958366000331885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDXCsDU3JzMwLjEiTiAyMcKwNDAnNTcuNiJF!5e0!3m2!1sro!2sro!4v1721390972944!5m2!1sro!2sro" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="event my-4">
             <h3>CUNUNIA RELIGIOASĂ</h3>
-            <img src="{{ url_for('static', filename='images/church.png') }}" class="event-logo img-fluid">
+            <img src="church.png" class="event-logo img-fluid">
             <p>Biserica „Sf. Gheorghe”, Cuveșdia</p>
             <p>orele 15:00</p>
             <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2774.001517807075!2d21.673797176114746!3d45.9512527008104!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDXCsDU3JzA0LjUiTiAyMcKwNDAnMzQuOSJF!5e0!3m2!1sro!2sro!4v1721391097675!5m2!1sro!2sro" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <div class="event my-4">
             <h3>PETRECEREA</h3>
-            <img src="{{ url_for('static', filename='images/party.png') }}" class="event-logo img-fluid">
+            <img src="party.png" class="event-logo img-fluid">
             <p>SAPOR Events, Lipova</p>
             <p>orele 19:00</p>
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2767.9507899133077!2d21.66860927612114!3d46.07202239267942!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x474f7df06ae17ea3%3A0x8bb33c1780f4eb4c!2sSAPOR%20Events!5e0!3m2!1sro!2sro!4v1721390381571!5m2!1sro!2sro" width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
@@ -483,7 +482,7 @@ footer img {
 <section id="rsvp" class="my-5">
     <!-- Imagine ca titlu -->
     <div class="section-title">
-        <img src="{{ url_for('static', filename='images/confirmare.png') }}" alt="Confirmare">
+        <img src="confirmare.png" alt="Confirmare">
     </div>
     <form id="rsvp-form">
         <div class="form-group">
@@ -579,7 +578,7 @@ footer img {
      <!-- Date de Contact -->
     <footer id="contact" class="my-5">
         <div class="section-title">
-            <img src="{{ url_for('static', filename='images/contact.png') }}" >
+            <img src="contact.png" >
         </div>
         <p class="contact-text">Pentru mai multe informații ne puteți contacta la numerele de telefon:</p>
         <div class="phone-numbers">
@@ -613,8 +612,6 @@ footer img {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="{{ url_for('static', filename='js/countdown.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/confirmation.js') }}"></script>
     <script>
         
 
