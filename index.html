@@ -5,12 +5,393 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invitație Nuntă</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="static/css/styles.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/elegant-2" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+    font-family: 'Times New Roman', sans-serif;
+    background-color: white;
+    color: black;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+section {
+    padding: 20px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Stiluri pentru imaginea de început și text */
+.invitation-header {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Înălțimea secțiunii să fie întregul ecran */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Fundal negru pentru a preveni spațiul alb */
+    overflow: hidden;
+    margin: 0; /* Eliminăm marginile */
+    padding: 0; /* Eliminăm padding-ul */
+}
+
+.invitation-header img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asigură că imaginea acoperă întregul ecran */
+    z-index: 0;
+}
+
+.overlay-image {
+    position: absolute;
+    max-width: 65%; /* Ajustează lățimea maximă a imaginii cu text */
+    max-height: 65%; /* Ajustează înălțimea maximă a imaginii cu text */
+    height: auto; /* Păstrează proporțiile imaginii */
+    width: auto; /* Păstrează proporțiile imaginii */
+    z-index: 1; /* Asigură că imaginea cu text este deasupra imaginii de fundal */
+}
+
+/* Stiluri pentru countdown */
+#countdown {
+    background-color: #849766; /* Culoare Sage Green pentru fundal */
+    padding: 10px; /* Spațiu interior pentru secțiune */
+    border-radius: 10px; /* Colțuri rotunjite pentru estetică */
+    box-sizing: border-box; /* Asigură că padding-ul nu afectează dimensiunea totală */
+}
+
+#countdown-timer {
+    display: flex; /* Flexbox pentru aliniere orizontală */
+    justify-content: space-around; /* Distribuie elementele uniform */
+    align-items: center; /* Aliniază elementele pe verticală */
+    gap: -15px; /* Spațiu între coloane */
+    font-family: 'Times New Roman', Times, serif;
+    flex-wrap: wrap; /* Permite elementelor să treacă pe următorul rând dacă nu există spațiu */
+}
+
+.countdown-item {
+    text-align: center; /* Centrează textul în fiecare coloană */
+    font-family: 'Elegant', sans-serif; /* Fontul caligrafic */
+    background-color: white; /* Fundal alb pentru fiecare pătrat */
+    padding: 10px; /* Spațiu interior pentru pătrat */
+    border-radius: 10px; /* Colțuri rotunjite pentru pătrat */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adaugă o umbră pentru efect de adâncime */
+    min-width: 70px; /* Dimensiune minimă pentru pătrat */
+    display: flex; /* Flexbox pentru aliniere verticală */
+    flex-direction: column; /* Aranjează numerele și etichetele pe verticală */
+    justify-content: center; /* Centrează conținutul pe verticală */
+    box-sizing: border-box; /* Asigură că padding-ul nu afectează dimensiunea totală */
+    margin: 5px; /* Adaugă spațiu între elemente pentru a preveni aglomerarea */
+}
+
+.countdown-number {
+    font-size: 1.8em; /* Mărimea fontului pentru numere */
+    display: block; /* Numerele pe un rând separat */
+    color: black;
+}
+
+.countdown-label {
+    font-size: 0.8em; /* Mărimea fontului pentru etichete */
+    display: block; /* Etichetele pe un rând separat */
+    color: black; /* Culoare mai deschisă pentru etichete */
+}
+
+form .form-group {
+    margin-bottom: 15px;
+}
+
+form button {
+    margin-top: 10px;
+}
+
+/* Stiluri personalizate pentru numele părinților */
+
+.invitation-date {
+    font-family: 'Great Vibes', cursive; /* Font caligrafic */
+    color: #849766; /* Culoare text pentru data din corpul invitației */
+    font-size: 2em; /* Mărime font pentru data */
+    margin: 0; /* Elimină marginea */
+}
+
+.parent-names {
+    font-family: 'Times New Roman', serif; /* Schimbă fontul după preferințe */
+    color: #849766; /* Schimbă culoarea după preferințe */
+    font-size: 1.2em; /* Mărime font (opțional) */
+    font-weight: bold; /* Stil font bold */
+    font-style: italic; /* Stil font italic */
+}
+
+.spiritual-parents {
+    font-family: 'Times New Roman', serif; /* Schimbă fontul după preferințe */
+    color: #849766; /* Schimbă culoarea după preferințe */
+    font-size: 1.3em; /* Mărime font (opțional) */
+    font-weight: bold; /* Stil font italic */
+    font-style: italic; /* Stil font italic */
+}
+
+/* Stiluri pentru cuvântul „și” */
+.and {
+    color: #000; /* Negru */
+    font-style: normal; /* Stil normal */
+    font-weight: normal; /* Stil normal */
+}
+
+/* Stiluri pentru imaginea de la începutul secțiunii invitației */
+.invitation-image {
+    max-width: 100%; /* Asigură că imaginea se ajustează la dimensiunea containerului */
+    height: auto; /* Păstrează proporțiile imaginii */
+    display: block;
+    margin: 0 auto 20px auto; /* Centrează imaginea și adaugă spațiu dedesubt */
+    width: 200px; /* Setează lățimea dorită pentru imagine */
+}
+
+/* Stiluri pentru logo-urile evenimentelor */
+.event {
+    background-color: #f9f9f9; /* Fundal ușor pentru evenimente */
+    padding: 20px; /* Spațiu interior */
+    border-radius: 8px; /* Colțuri rotunjite */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Umbra ușoară pentru efect de adâncime */
+    margin-bottom: 20px; /* Spațiu între evenimente */
+}
+
+.event img {
+    max-width: 100px; /* Lățimea maximă a logo-ului */
+    height: auto; /* Menține proporțiile imaginii */
+    display: block; /* Afișează imaginea pe rând propriu */
+    margin: 0 auto 10px auto; /* Centrează imaginea și adaugă spațiu sub ea */
+}
+
+.event-logo {
+    max-width: 100px; /* Lățimea maximă a logo-ului */
+    height: auto; /* Menține proporțiile logo-ului */
+    margin-bottom: 10px; /* Spațiu sub logo */
+}
+
+.event h3 {
+    font-family: 'Times New Roman', serif; /* Font caligrafic pentru titluri */
+    font-size: 1.4em; /* Mărime font pentru titluri */
+    color: black; /* Culoarea textului pentru titluri */
+    margin: 0; /* Elimină marginea */
+    font-weight: bold;
+}
+
+.event p {
+    font-size: 1.1em; /* Mărime font pentru descriere */
+    margin: 0; /* Elimină marginea */
+}
+
+.event iframe {
+    width: 100%;
+    height: 200px; /* Înălțimea iframe-ului pentru harta */
+    border: none; /* Elimină bordura iframe-ului */
+    margin-top: 10px; /* Spațiu deasupra hărții */
+    border-radius: 8px; /* Colțuri rotunjite pentru estetică */
+}
+
+/* Media Queries pentru responsivitate */
+@media (max-width: 768px) {
+    body {
+        font-size: 1em; /* Diminuarea mărimii fontului pentru ecrane mai mici */
+    }
+
+    .overlay-image {
+        max-width: 100%;
+    }
+
+    .countdown-number {
+        font-size: 1.8em; /* Diminuarea mărimii fontului pentru numere */
+    }
+
+    .countdown-label {
+        font-size: 1.1em; /* Diminuarea mărimii fontului pentru etichete */
+    }
+
+    .countdown-item {
+        min-width: 60px; /* Ajustarea dimensiunii minime pentru pătrate pe ecrane mai mici */
+    }
+
+    .invitation-date {
+        font-size: 2em; /* Diminuarea mărimii fontului pentru data */
+    }
+
+    .parent-names {
+        font-size: 1.2em;
+    }
+
+    .spiritual-parents {
+        font-size: 1.3em; /* Diminuarea mărimii fontului pentru numele părinților */
+    }
+
+    .event h3 {
+        font-size: 1.4em; /* Diminuarea mărimii fontului pentru titlurile evenimentelor */
+    }
+
+    .event p {
+        font-size: 1.2em; /* Diminuarea mărimii fontului pentru descrierea evenimentelor */
+    }
+
+    #rsvp-form {
+        width: 100%;
+        padding: 15px; /* Ajustează padding-ul pentru ecrane mai mici */
+    }
+
+    .section-title img {
+        max-width: 80%; /* Ajustează dimensiunea imaginii pe ecrane mici */
+    }
+}
+
+/* Asigură-te că containerul este centrat */
+#rsvp-form {
+    align-items: center; /* Centrează formularul pe orizontală */
+    background-color: #f9f9f9; /* Fundal mai închis pentru formular */
+    padding: 20px; /* Spațiu interior */
+    border-radius: 8px; /* Colțuri rotunjite pentru estetică */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Umbra pentru efect de adâncime */
+    max-width: 100%; /* Asigură că formularul se extinde pe întreaga lățime a ecranului */
+    margin: 0 auto; /* Centrează formularul pe orizontală */
+    width: 100%;
+    font-size: 1.2em;
+}
+
+/* Stiluri pentru imaginea secțiunii */
+.section-title {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.section-title img {
+    max-width: 100%; /* Se adaptează la dimensiunea containerului */
+    height: auto; /* Menține proporțiile imaginii */
+    display: block;
+    margin: 0 auto; /* Centrează imaginea */
+}
+
+
+.form-control-all {
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: black;
+}
+
+.form-control-number {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: black;
+}
+
+.form-control-message {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-color: black;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Stil personalizat pentru buton */
+.btn-custom {
+    background-color: #aeb792; /* Verde personalizat */
+    color: white; /* Culoarea textului */
+    border-radius: 8px; /* Elimină bordura implicită */
+}
+
+.btn-custom:hover {
+    background-color: #849766; /* Verde mai închis la hover */
+}
+
+.radio-container {
+    align-items: center;
+    gap: 20px;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+footer img {
+    max-width: 80%;
+    height: auto;
+}
+
+.peony-footer {
+    margin-top: 20px;
+    text-align: center;
+    max-width: 80%;
+    height: auto;    
+}
+.phone-numbers {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color: #849766;
+}
+
+.phone-number {
+    margin: 0 15px;
+    font-size: 1.2em;
+}
+
+.contact-text {
+    font-size: 1.1em;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.social-button {
+    display: inline-flex;
+    padding: 10px;
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.facebook-button {
+    background-color: #3b5998;
+}
+
+.facebook-button:hover {
+    background-color: #2d4373;
+}
+
+.instagram-button {
+    background-color: #e4405f;
+}
+
+.instagram-button:hover {
+    background-color: #c13584;
+}
+
+.social-name {
+    margin-top: 10px; /* Ajustează spațierea dintre butoane și text */
+    font-size: 1.2em;
+    color: #333; /* Ajustează culoarea textului după preferință */
+}
+</style>
 </head>
 <body>
         <!-- Numele Mirilor -->
@@ -234,9 +615,111 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="{{ url_for('static', filename='js/countdown.js') }}"></script>
     <script src="{{ url_for('static', filename='js/confirmation.js') }}"></script>
-    <script src="static/js/countdown.js"></script>
-    <script src="static/js/counfirmation.js"></script>
     <script>
+        
+
+function updateCountdown() {
+    const eventDate = new Date('2025-05-10T00:00:00'); // Data evenimentului
+    const now = new Date();
+    const timeDifference = eventDate - now;
+
+    if (timeDifference < 0) {
+        // Dacă evenimentul a trecut
+        document.getElementById('days').querySelector('.countdown-number').textContent = '0';
+        document.getElementById('hours').querySelector('.countdown-number').textContent = '0';
+        document.getElementById('minutes').querySelector('.countdown-number').textContent = '0';
+        document.getElementById('seconds').querySelector('.countdown-number').textContent = '0';
+        return;
+    }
+
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+    document.getElementById('days').querySelector('.countdown-number').textContent = days;
+    document.getElementById('hours').querySelector('.countdown-number').textContent = hours;
+    document.getElementById('minutes').querySelector('.countdown-number').textContent = minutes;
+    document.getElementById('seconds').querySelector('.countdown-number').textContent = seconds;
+}
+
+// Actualizează countdown-ul la fiecare secundă
+setInterval(updateCountdown, 1000);
+
+// Inițializare countdown la încărcarea paginii
+updateCountdown();
+
+document.addEventListener('DOMContentLoaded', function () {
+    const attendingYes = document.getElementById('attending-yes');
+    const attendingNo = document.getElementById('attending-no');
+    const additionalQuestions = document.getElementById('additional-questions');
+    const accommodationSection = document.getElementById('accommodation-section');
+    const companionsSection = document.getElementById('companions-section');
+    const childrenSection = document.getElementById('children-section');
+    const guestsSection = document.getElementById('guests-section');
+    const childrenNumberSection = document.getElementById('children-number-section');
+
+    // Inițial, ascunde secțiunile suplimentare
+    additionalQuestions.style.display = 'none';
+    accommodationSection.style.display = 'none';
+    companionsSection.style.display = 'none';
+    childrenSection.style.display = 'none';
+    guestsSection.style.display = 'none';
+    childrenNumberSection.style.display = 'none';
+
+    // Ascunde toate secțiunile suplimentare atunci când se selectează 'NU' la participare
+    attendingNo.addEventListener('change', function () {
+        if (this.checked) {
+            additionalQuestions.style.display = 'none';
+            accommodationSection.style.display = 'none';
+            companionsSection.style.display = 'none';
+            childrenSection.style.display = 'none';
+            guestsSection.style.display = 'none';
+            childrenNumberSection.style.display = 'none';
+        }
+    });
+
+    // Afișează secțiunile suplimentare atunci când se selectează 'DA' la participare
+    attendingYes.addEventListener('change', function () {
+        if (this.checked) {
+            additionalQuestions.style.display = 'block';
+            accommodationSection.style.display = 'block';
+            companionsSection.style.display = 'block';
+            childrenSection.style.display = 'block';
+            guestsSection.style.display = 'block';
+            childrenNumberSection.style.display = 'block';
+        }
+    });
+
+    // Afișează secțiunile corespunzătoare în funcție de răspunsul la întrebarea despre însoțitori
+    document.querySelectorAll('input[name="companions"]').forEach(function (elem) {
+        elem.addEventListener('change', function () {
+            if (this.value === 'yes') {
+                guestsSection.style.display = 'block';
+                childrenSection.style.display = 'block';
+            } else {
+                guestsSection.style.display = 'none';
+                childrenNumberSection.style.display = 'none';
+                childrenSection.style.display = 'none';
+            }
+        });
+    });
+
+    // Afișează secțiunea de număr copii dacă se selectează 'DA' la întrebarea despre copii
+    document.querySelectorAll('input[name="children"]').forEach(function (elem) {
+        elem.addEventListener('change', function () {
+            if (this.value === 'yes') {
+                childrenNumberSection.style.display = 'block';
+                guestsSection.style.display = 'block'; // Dacă copiii sunt aduși, afișăm și numărul de participanți
+            } else {
+                childrenNumberSection.style.display = 'none';
+                guestsSection.style.display = 'block'; // Dacă nu sunt copii, afișăm doar numărul de participanți
+            }
+        });
+    });
+});
+
+
         // Script pentru trimiterea datelor din formular prin AJAX
         $(document).ready(function() {
     $('#rsvp-form').on('submit', function(event) {
