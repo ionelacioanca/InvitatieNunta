@@ -735,7 +735,22 @@ document.addEventListener('DOMContentLoaded', function () {
         };
 
         console.log('Form Data:', formData); // Debugging
+        const apiUrl = 'https://invitatie-online.herokuapp.com
+            async function submitForm(data) {
+    const response = await fetch(`${apiUrl}/confirmare`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    });
 
+    if (response.ok) {
+        console.log('Formular trimis cu succes!');
+    } else {
+        console.log('A apărut o eroare.');
+    }
+            
         $.ajax({
             type: 'POST',
             url: '/send-message',
